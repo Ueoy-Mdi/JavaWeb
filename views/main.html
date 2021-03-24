@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="../css/1.css">
+    <style>
+        input[type='username'],input[type='password'],button{
+            margin-top:20px;
+            height:25px;
+        }
+        .login_article{
+            border:1px solid #ccc;
+            position:absolute;
+            top:0px;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            width:360px;
+            height:170px;
+            margin:auto;
+        }
+        .login_article_image{
+            float:left;
+            margin:20px;
+        }
+        #btn_login{
+            margin-left:157px;
+        }
+        .errorMsg{
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+    <article class="login_article">
+        <aside class="login_article_image">
+            <img src="../img/login_logo.jpg">
+            <div class="errorMsg">用户名或密码错误！</div>
+        </aside>
+        
+        <section>
+            <form>
+                用户名：<input type="username" name="username"><br>
+                密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password">
+                <button id="btn_login" type="submit">登录</button>
+            </form>
+        </section>
+    </article>
+</body>
+</html>
