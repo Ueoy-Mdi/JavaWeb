@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img.borderColor{
+            border:1px solid red;
+        }
+        a.borderColor{
+            border:1px solid blue;
+        }
+        .contentBox,.borderBox{
+            width:200px;
+            height: 150px;
+            padding:50px;
+        }
+        .contentBox{
+            border:1px solid red;
+            overflow: hidden;
+            outline:1px solid yellow;
+            margin:0px auto 50px;
+        }
+        .borderBox{
+            margin-top:50px;
+            border:1px solid blue;
+        }
+        p::first-letter{
+            font-size:1.5em;
+        }
+        p::first-line{
+            background-color:cornsilk;
+        }
+        div>p{
+            color:coral;
+        }
+        img+a{
+            border:1px solid #ccc;
+        }
+        .class1{
+            color:blue;
+        }
+        .class2{
+            border:1px solid red;
+        }
+        [class~=class1]{
+            font-size: 2em;
+        }
+        br+p::after{
+            content:'————';
+        }
+        br+p::before{
+            content:'商标认正：';
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>简单标签</h2>
+        <input type="text">
+        <figure>
+            <img class="borderColor borderBox" id="logo" src="../img/login_logo.jpg" alt="logo" title="一个小孩">
+            <figcaption>一个小朋友</figcaption>
+        </figure>
+        <div>我是一个块级标签</div>
+        <img hidden id="test" src="../img/海螺人.jpg">
+        <br>
+        <p class="class1 class2">
+            我是捣乱的。
+        </p>
+        <a class="borderColor" href="../views/main.html">这是一个超链接</a>我不是一个超链接
+        <a>我也是一个超链接</a>
+        <div>我是一个p标签中的div标签
+            <nav>
+                <p>我是一个P标签</p>
+            </nav>
+        </div>
+        <p>
+            <nav>我是一个小导航</nav>
+            <a href="#">我是p标签中的a标签</a>
+        </p>
+    </section>
+    <hr>
+    <section>
+        <h2>盒子属性</h2>
+        <div class="contentBox" style="box-sizing: content-box">
+            contentBoxcontentBoxcontentBoxcontentBoxcontentBoxcontentBoxcontentBox
+        </div>
+        <div class="borderBox" style="box-sizing: border-box">
+            IEBox
+        </div>
+    </section>
+    <section>
+        <pre>北斗七星高，
+哥舒夜带刀。
+        </pre>
+        <ol style="padding-left:0px;list-style-position: inside">
+            <li>熊大</li>
+            <li>光头强</li>
+            <li>熊二</li>
+        </ol>
+        <ul>
+            <li>熊大</li>
+            <li>光头强</li>
+            <li>熊二</li>
+        </ul>
+        <dl>
+            <dt>张居正</dt>
+            <dd>明朝万历年间的首辅，....</dd>
+        </dl>
+    </section>
+    <section>
+        <p style="width:300px;">
+            伪元素选择器的前缀是两个冒号字符（::），但浏览器认为选择器只有一个冒号。这样它的格式就跟伪类选择器的格式一致了。虽然CSS3标准要求伪元素使用双冒号的写法，但也依然支持单冒号的写法。为了向后兼容，建议在目前还是使用单冒号的写法。
+        </p>
+    </section>
+</body>
+</html>
