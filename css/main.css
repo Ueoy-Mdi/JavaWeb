@@ -1,0 +1,107 @@
+html,body{
+    margin:0px;
+    width:100vw;
+    height:100vh;
+}
+main{
+    height:100vh;
+    display: grid;
+    grid-template-columns: 200px auto 200px;
+    grid-template-rows: 80px 30px auto 40px;
+    grid-template-areas: "head head head"
+                         "topMenu topMenu topMenu"
+                         "leftSide main rightSide"
+                         "foot foot foot"
+}
+.head{
+    grid-area:head;
+    border:1px solid #ccc;
+}
+.topMenu{
+    grid-area:topMenu;
+}
+.leftSide{
+    grid-area: leftSide;
+}
+.main{
+    grid-area: main;
+    border:1px solid #ccc;
+}
+.rightSide{
+    grid-area: rightSide;
+    border:1px solid #ccc;
+}
+.foot{
+    grid-area: foot;
+    border:1px solid #ccc;
+}
+.topMenu_ul,.leftMenu_ul_level1,.leftMenu_ul_level2{
+    padding-left:0px;
+}
+.topMenu_ul{
+    -webkit-margin-start:5rem;
+    -webkit-margin-before:4px;
+    -webkit-margin-after:0rem;
+}
+.topMenu_li,.leftMenu_li_level1,.leftMenu_li_level2{
+    list-style: none;
+}
+.topMenu_li{
+    float: left;
+    text-align:center;
+    width:120px;
+    font:bold 14px/20px '宋体';
+    border-left:2px solid red;
+}
+.topMenu_li:last-child{
+    border-right:2px solid red;
+}
+.a_menuClass{
+    text-decoration: none;
+    color:black;
+    vertical-align: 2px;
+}
+.topMenuImgs,.leftMenuImgs{
+    display: inline-block;
+    margin-top:3px;
+    width:15px;
+    height: 15px;
+}
+.leftMenuImgs{
+    float: right;
+    margin-top:1px;
+    margin-right:1px;
+    width:15px;
+    height: 15px;
+    border:1px solid #ccc;  
+    cursor: pointer;
+}
+.topMenu_li nav:hover{
+    cursor: pointer;
+}
+#tomMenu_img_article{
+    background:url(../img/0032017360716703_b.png) no-repeat -66px -27px/170px 150px;
+}
+#tomMenu_img_first{
+    background:url(../img/0032017360716703_b.png) no-repeat 0px -107px/170px 150px;
+}
+#tomMenu_img_articleType{
+    background:url(../img/0032017360716703_b.png) no-repeat -44px -107px/170px 150px;
+}
+#tomMenu_img_config{
+    background:url(../img/0032017360716703_b.png) no-repeat -22px -133px/170px 150px;
+}
+.leftMenu_ul_level1{
+    margin:1px 1em;
+    font:bold 14px/20px '宋体';
+}
+.leftMenu_li_level1{
+    border:1px solid #ccc;
+    margin-top:1px;
+}
+.leftMenu_li_level2{
+    padding-left:2em;
+    font:bold 12px/20px '宋体';
+    border:1px solid #ccc;
+    margin:1px auto;
+}

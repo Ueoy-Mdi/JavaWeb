@@ -5,48 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style type="text/css">
-        html,body {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .mainBorder {
-            border: 1px solid #ccc;
-            margin: 2px 0px;
-        }
-        .innerBorder {
-            border: 1px solid #ccc;
-            margin: 2px;
-        }
-        header {
-            order: 0;
-            height: 80px;
-        }
-        section {
-            order: 1;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: row;
-        }
-        footer {
-            order: 2;
-            height: 50px;
-        }
-        nav {
-            width: 180px;
-        }
-        article {
-            width: 100%
-        }
-    </style>
+    <link rel="icon" href="../img/favicon.gif" type="image/gif" />
+    <link rel="stylesheet" href="../css/1.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script>
+    function init(){
+        let nodes=document.querySelectorAll(".leftMenuImgs");
+        Array.from(nodes).forEach((item)=>{
+            item.addEventListener("click",(event)=>{
+                let node=event.target.parentNode.nextElementSibling;
+                if(node.hidden==true){
+                    node.hidden=false;
+                }else{
+                    node.hidden=true;
+                }
+            },false);
+        });
+    }
+    window.addEventListener("load",init,false);
+    </script>
 </head>
-<body>
-    <header class="mainBorder">logo</header>
-	<section>
-		<nav class="innerBorder">菜单</nav>
-		<article class="innerBorder">主体</article>
-	</section>
-	<footer class="mainBorder">结尾</footer>
+<main>
+        <header class="head">logo</header>
+        <nav class="topMenu">
+            <ul class="topMenu_ul">
+                <li class="topMenu_li">
+                    <nav>
+                        <div class="topMenuImgs" id="tomMenu_img_first"></div>
+                        <a class="a_menuClass" href="#">首页</a>
+                    </nav>
+                </li>
+                <li class="topMenu_li">
+                    <nav>
+                        <div class="topMenuImgs" id="tomMenu_img_article"></div>
+                        <a id="a_insertArticle" class="a_menuClass" href="#">写文章</a>
+                    </nav>
+                </li>
+                <li class="topMenu_li">
+                    <nav>
+                        <div class="topMenuImgs"  id="tomMenu_img_articleType"></div>
+                        <a class="a_menuClass" href="#">文章类型</a>
+                    </nav>
+                </li>
+                <li class="topMenu_li">
+                    <nav>
+                        <div class="topMenuImgs"  id="tomMenu_img_config"></div>
+                        <a class="a_menuClass" href="#">设置</a>
+                    </nav>
+                </li>
+            </ul>
+        </nav>
+        <nav class="leftSide">
+            <h2 style="text-align: center">文章类型</h2>
+            <ul class="leftMenu_ul_level1">
+                <li class="leftMenu_li_level1">Java Core
+                    <div class="leftMenuImgs"></div>
+                </li>
+                <ul class="leftMenu_ul_level2" hidden>
+                    <li class="leftMenu_li_level2">面向对象</li>
+                    <li class="leftMenu_li_level2">多线程</li>
+                </ul>
+                <li class="leftMenu_li_level1">Java Web
+                        <div class="leftMenuImgs">
+                </li>
+                <ul class="leftMenu_ul_level2" hidden>
+                        <li class="leftMenu_li_level2">Servlet3+</li>
+                        <li class="leftMenu_li_level2">JSTL/EL</li>
+                    </ul>
+                <li class="leftMenu_li_level1">前端技术
+                        <div class="leftMenuImgs">
+                </li>
+                <ul class="leftMenu_ul_level2" hidden>
+                        <li class="leftMenu_li_level2">HTML5</li>
+                        <li class="leftMenu_li_level2">CSS3</li>
+                        <li class="leftMenu_li_level2">ECMAScript 6</li>
+                    </ul>
+                <li class="leftMenu_li_level1">心灵鸡汤
+                        <div class="leftMenuImgs">
+                </li>
+                <ul class="leftMenu_ul_level2" hidden>
+                        <li class="leftMenu_li_level2">心情故事</li>
+                    </ul>
+            </ul>
+        </nav>
+        <section class="main">main page</section>
+        <nav class="rightSide">right menu</nav>
+        <footer class="foot">info</footer>
+    </main>
 </body>
 </html>
