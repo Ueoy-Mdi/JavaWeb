@@ -1,0 +1,27 @@
+body{
+    background-image:url(../img/iron_man.jpg);
+    background-size:1300px 670px;
+    background-position:-300px 0px;
+}
+h2{
+    text-align:center;
+}
+input{
+    background:none;
+}
+section{
+    width:500px;
+    height:600px;
+    /* border:1px solid #ccc; */
+    border-radius:10px;
+    margin-left:700px;
+    margin-top:60px;
+}
+table{
+    margin-left:60px;
+    border-spacing:0px 15px;
+}
+.submit{
+    margin-left:130px;
+    border-radius:10px;
+}
