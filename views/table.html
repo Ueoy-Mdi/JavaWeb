@@ -1,104 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>表格</title>
-    <style>
-        .query{
-            margin-bottom: 5px;
-            height: 30px;
-            padding-top:4px;
-            padding-left:4px;
-            text-align:center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>表格</title>
+<style>
+    .query{
+        border:1px solid #ccc;
+        margin-bottom: 5px;
+        height: 30px;
+        padding-top:4px;
+        padding-left:4px;
+        text-align:center;
+    }
+    table{
+        width:100%;
+    }
+    table,td,th{
+        border:1px solid #ccc;
+        border-collapse:collapse;
+    }
+    td{
+        text-align:center;
+    }
+    tbody tr:nth-child(2){
+        background-color: aliceblue;
+    }
+    tbody tr:hover{
+        background-color:#f7fd82;
+        cursor: pointer;
+    }
+    .gbtn_curd{
+        float: left;
+    }
+    .gbtn_page{
+        float: right;
+    }
+    #btn_query{
+        margin-left:10px;
+    }
+</style>
+<script>
+        function init(){
+            document.getElementById("myTbody").addEventListener("dblclick",(event)=>{
+                let currentNode=event.target;   //获取被双击格子
+                let input=document.createElement("input");  //创建一个文本框
+                input.type="text";
+                input.value=currentNode.innerHTML;
+                input.size=input.value.length;
+                //设定文本框丢失焦点时消失，并同时将文本框中的数据添入td。
+                input.addEventListener("blur",(event)=>{
+                    let pn=event.target.parentNode;
+                    pn.innerHTML=event.target.value;
+                },false);
+                currentNode.innerHTML="";
+                currentNode.appendChild(input);     //将文本框作为currentNode元素的子元素追加 
+                input.focus();      //解决没法获取焦点bug.
+            },false);
         }
-        table{
-            width:50%;
-            margin:auto;
-        }
-        table,td,th{
-            border:1px solid #ccc;
-            border-collapse:collapse;
-        }
-        td{
-            text-align:center;
-        }
-        tbody tr:hover{
-            background-color:#f7fd82;
-            cursor: pointer;
-        }
-        .gbtn_curd{
-            float: left;
-        }
-        .gbtn_page{
-            float: right;
-        }
-        #btn_query{
-            margin-left:10px;
-        }
-    </style>
-</head>
-<body>
-    <nav class="query">
-        <input type="search" name="keyword"><button id="btn_query">查询</button>
-    </nav>
-    <table>
-        <thead>
-            <tr>
-                <th><input type="checkbox"></th>
-                <th>用户名</th>
-                <th>密码</th>
-                <th>性别</th>
-                <th>email</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="5">
-                    <nav class="gbtn_curd">
-                        <button>新增</button>
-                        <button>修改</button>
-                        <button>删除</button>
-                    </nav>
-                    <nav class="gbtn_page">
-                        首页&nbsp;上一页&nbsp;
-                        <select></select>&nbsp;
-                        下一页&nbsp;尾页
-                    </nav>
-                </td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td><input type="checkbox" value="1"></td>
-                <td>admin</td>
-                <td>admin</td>
-                <td>男</td>
-                <td>admin@qq.com</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value="2"></td>
-                <td>test</td>
-                <td>test</td>
-                <td>女</td>
-                <td>test@qq.com</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value="3"></td>
-                <td>test01</td>
-                <td>test01</td>
-                <td>女</td>
-                <td>test01@qq.com</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value="4"></td>
-                <td>manager</td>
-                <td>manager</td>
-                <td>男</td>
-                <td>manager@qq.com</td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-</html>
+        window.addEventListener("load",init,false);
+        </script>
+    </head>
+    <body>
+        <nav class="query">
+            <input type="search" name="keyword"><button id="btn_query">查询</button>
+        </nav>
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>性别</th>
+                    <th>email</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <nav class="gbtn_curd">
+                            <button>新增</button>
+                            <button>修改</button>
+                            <button>删除</button>
+                        </nav>
+                        <nav class="gbtn_page">
+                            首页&nbsp;上一页&nbsp;
+                            <select></select>&nbsp;
+                            下一页&nbsp;尾页
+                        </nav>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody id="myTbody">
+                <tr>
+                    <td><input type="checkbox" value="1"></td>
+                    <td>admin</td>
+                    <td>admin</td>
+                    <td>男</td>
+                    <td>admin@qq.com</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value="2"></td>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>女</td>
+                    <td>test@qq.com</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value="3"></td>
+                    <td>test01</td>
+                    <td>test01</td>
+                    <td>女</td>
+                    <td>test01@qq.com</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value="4"></td>
+                    <td>manager</td>
+                    <td>manager</td>
+                    <td>男</td>
+                    <td>manager@qq.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    </html>
