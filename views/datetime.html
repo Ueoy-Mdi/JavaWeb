@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日期时间</title>
+    <style>
+        .timeStyle{
+            border:1px solid red;
+            background-color:yellow;
+            padding:5px;
+        }
+
+        button,div{
+            margin-top:20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function getDate() {
+            let today = new Date();
+            let divDate = document.getElementById("date");
+            divDate.innerHTML = "今天是" + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
+            divDate.innerHTML += "，星期" + today.getDay();
+        }
+        function getTime(location="time",flag=false){
+            let currentTime=new Date();
+            let divTime=document.getElementById(location);
+            let template=`<span class="timeStyle">${currentTime.getHours()}</span>&nbsp;
+                :&nbsp<span class="timeStyle">${currentTime.getMinutes()}</span>&nbsp;
+                :&nbsp<span class="timeStyle">${currentTime.getSeconds()}</span>`;
+            divTime.innerHTML = template;
+            if(flag){
+                timeoutId=setTimeout("getTime('time',true)",1000);
+            }
+        }
+        function init(){
+            getDate();
+            getTime("time",true);
+            getTime("time1");
+            intervalId=setInterval('getTime("time1")',1000);
+            document.getElementById("btn_Controller").addEventListener("click",(event)=>{
+                if(event.target.innerHTML=="停止"){
+                    clearTimeout(timeoutId);
+                    event.target.innerHTML="开始";
+                }else{
+                    event.target.innerHTML="停止";
+                    timeoutId=setTimeout("getTime()",1000);
+                }
+            },false);
+            document.getElementById("btn_Controller1").addEventListener("click",(event)=>{
+                if(event.target.innerHTML=="停止"){
+                    clearInterval(intervalId);
+                    event.target.innerHTML="开始";
+                }else{
+                    event.target.innerHTML="停止";
+                    intervalId=setInterval('getTime("time1")',1000);
+                }
+            },false);			
+        }
+        let timeoutId;
+        let intervalId;
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div id="date"></div>
+    <hr>
+    setTimeout()函数的应用
+    <div id="time"></div>
+    <button id="btn_Controller">停止</button>
+    <hr>
+    setInterval()函数的应用
+    <div id="time1"></div>
+    <button id="btn_Controller1">停止</button>
+    <hr>
+    秒杀倒计时
+</body>
+</html>

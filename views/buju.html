@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>页面布局</title>
     <link rel="icon" href="../img/favicon.gif" type="image/gif" />
     <link rel="stylesheet" href="../css/1.css">
     <link rel="stylesheet" href="../css/main.css">
     <script>
-    function init(){
-        let nodes=document.querySelectorAll(".leftMenuImgs");
-        Array.from(nodes).forEach((item)=>{
-            item.addEventListener("click",(event)=>{
-                let node=event.target.parentNode.nextElementSibling;
-                if(node.hidden==true){
-                    node.hidden=false;
-                }else{
-                    node.hidden=true;
-                }
-            },false);
-        });
-    }
-    window.addEventListener("load",init,false);
+        function init(){
+            let nodes=document.querySelectorAll(".leftMenuImgs");
+            Array.from(nodes).forEach((item)=>{
+                item.addEventListener("click",(event)=>{
+                    let node=event.target.parentNode.nextElementSibling;
+                    if(node.hidden==true){
+                        node.hidden=false;
+                    }else{
+                        node.hidden=true;
+                    }
+                },false);
+            });
+        }
+        window.addEventListener("load",init,false);
     </script>
 </head>
-<main>
+<body>
+    <main>
         <header class="head">logo</header>
         <nav class="topMenu">
             <ul class="topMenu_ul">

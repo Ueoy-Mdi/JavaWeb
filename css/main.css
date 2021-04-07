@@ -9,9 +9,9 @@ main{
     grid-template-columns: 200px auto 200px;
     grid-template-rows: 80px 30px auto 40px;
     grid-template-areas: "head head head"
-                         "topMenu topMenu topMenu"
-                         "leftSide main rightSide"
-                         "foot foot foot"
+                        "topMenu topMenu topMenu"
+                        "leftSide main rightSide"
+                        "foot foot foot"
 }
 .head{
     grid-area:head;

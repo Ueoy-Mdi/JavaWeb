@@ -1,75 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>表格</title>
-<style>
-    .query{
-        border:1px solid #ccc;
-        margin-bottom: 5px;
-        height: 30px;
-        padding-top:4px;
-        padding-left:4px;
-        text-align:center;
-    }
-    table{
-        width:100%;
-    }
-    table,td,th{
-        border:1px solid #ccc;
-        border-collapse:collapse;
-    }
-    td{
-        text-align:center;
-    }
-    tbody tr:nth-child(2){
-        background-color: aliceblue;
-    }
-    tbody tr:hover{
-        background-color:#f7fd82;
-        cursor: pointer;
-    }
-    .gbtn_curd{
-        float: left;
-    }
-    .gbtn_page{
-        float: right;
-    }
-    #btn_query{
-        margin-left:10px;
-    }
-</style>
-<script>
-        function init(){
-            document.getElementById("myTbody").addEventListener("dblclick",(event)=>{
-                let currentNode=event.target;   //获取被双击格子
-                let input=document.createElement("input");  //创建一个文本框
-                input.type="text";
-                input.value=currentNode.innerHTML;
-                input.size=input.value.length;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表格</title>
+    <style>
+        .query {
+            margin-bottom: 5px;
+            height: 30px;
+            padding-top: 4px;
+            padding-left: 4px;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+        }
+
+        table,td,th {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        tbody tr:hover {
+            background-color: #f7fd82;
+            cursor: pointer;
+        }
+
+        .gbtn_curd {
+            float: left;
+        }
+
+        .gbtn_page {
+            float: right;
+        }
+
+        #btn_query {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function insertUser() {
+            //收集数据
+            let rowData = [];
+            rowData[0] = document.getElementById("insertUser_userName").value;
+            rowData[1] = document.getElementById("insertUser_password").value;
+            rowData[2] = true == document.getElementById("insertUser_sex_man").checked ? "男" : "女";
+            rowData[3] = document.getElementById("insertUser_email").value;
+            //插入数据
+            let tbody = document.getElementById("myTbody");
+            let row = tbody.insertRow(tbody.rows.length);
+            row.setAttribute("data-row-id", tbody.rows.length);
+            let cell0 = row.insertCell(0);
+            let input = document.createElement("input");
+            input.type = "checkbox";
+            input.name = "trCheck";
+            input.value = tbody.rows.length;
+            cell0.appendChild(input);
+            let count = 1;
+            rowData.forEach((item) => {
+                let cell = row.insertCell(count);
+                cell.innerHTML = item;
+                count++;
+            });
+            document.getElementById("insertUser").hidden = true;
+            document.getElementById("userTable").hidden = false;
+        }
+        function deleteUser() {
+            //定位
+            let arrays = document.getElementsByName("trCheck");
+            let params = "";
+            [...arrays].filter(item => item.checked == true).forEach((item) => {
+                if (params == "") {
+                    params += item.value;
+                } else {
+                    params += ",";
+                    params += item.value;
+                }
+            });
+            //删除
+            if (params != "") {
+                if (confirm("你确定要删除选择的数据吗？")) {
+                    let newArrays = params.split(",");
+                    newArrays.forEach((item) => {
+                        let currentIndex = document.querySelector(`[data-row-id='${item}']`).rowIndex;
+                        document.getElementById("myTbody").deleteRow(currentIndex - 1);
+                    });
+                }
+            } else {
+                alert("请选择相应的数据！");
+            }
+        }
+        function init() {
+            //新增用户
+            document.getElementById("insertUser_sumbit").addEventListener("click", insertUser, false);
+            //删除用户
+            document.getElementById("userTable_btnDeleteUsers").addEventListener("click", deleteUser, false);
+            //单击行的任务位置都选中该行第一列的复选框
+            document.querySelectorAll(".normalTable tbody")[0].addEventListener("click", (event) => {
+                if (event.target.tagName != "INPUT") {
+                    let node = event.target.parentNode.firstElementChild.firstElementChild;
+                    if (node.checked == true) {
+                        node.checked = false;
+                    } else {
+                        node.checked = true;
+                    }
+                }
+            }, false);
+            //复选框全选功能
+            document.getElementById("allCheck").addEventListener("change", () => {
+                let flag = document.getElementById("allCheck").checked;
+                let arrays = document.getElementsByName("trCheck");
+                arrays.forEach((item) => {
+                    item.checked = flag;
+                });
+            }, false);
+            //返回用户显示表格
+            document.getElementById("insertUser_btnReturn").addEventListener("click", () => {
+                document.getElementById("insertUser").hidden = true;
+                document.getElementById("userTable").hidden = false;
+            }, false);
+            //新增用户
+            document.getElementById("userTable_btnInsertUser").addEventListener("click", () => {
+                document.getElementById("insertUser").hidden = false;
+                document.getElementById("userTable").hidden = true;
+            }, false);
+            //修改单元格
+            document.getElementById("myTbody").addEventListener("dblclick", (event) => {
+                let currentNode = event.target;   //获取被双击格子
+                let input = document.createElement("input");  //创建一个文本框
+                input.type = "text";
+                input.value = currentNode.innerHTML;
+                input.size = input.value.length;
                 //设定文本框丢失焦点时消失，并同时将文本框中的数据添入td。
-                input.addEventListener("blur",(event)=>{
-                    let pn=event.target.parentNode;
-                    pn.innerHTML=event.target.value;
-                },false);
-                currentNode.innerHTML="";
+                input.addEventListener("blur", (event) => {
+                    let pn = event.target.parentNode;
+                    pn.innerHTML = event.target.value;
+                }, false);
+                currentNode.innerHTML = "";
                 currentNode.appendChild(input);     //将文本框作为currentNode元素的子元素追加 
                 input.focus();      //解决没法获取焦点bug.
-            },false);
+            }, false);
         }
-        window.addEventListener("load",init,false);
-        </script>
-    </head>
-    <body>
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <section id="insertUser" hidden>
+        <table class="noBorderTable">
+            <tbody>
+                <tr>
+                    <td><label for="userName">用户名：</label></td>
+                    <td><input type="text" name="userName" id="insertUser_userName"></td>
+                </tr>
+                <tr>
+                    <td><label for="userName">密码：</label></td>
+                    <td><input type="password" name="password" id="insertUser_password"></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <input type="radio" name="sex" id="insertUser_sex_man" value="1" checked>男&nbsp;
+                        <input type="radio" name="sex" id="insertUser_sex_woman" value="2">女
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="userName">email：</label></td>
+                    <td><input type="email" name="email" id="insertUser_email"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="insertUser_btnReturn">返回</button>
+                        <button id="insertUser_sumbit">提交</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section id="userTable">
         <nav class="query">
             <input type="search" name="keyword"><button id="btn_query">查询</button>
         </nav>
-        <table>
+        <table class="normalTable">
             <thead>
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th><input type="checkbox" id="allCheck"></th>
                     <th>用户名</th>
                     <th>密码</th>
                     <th>性别</th>
@@ -80,42 +201,40 @@
                 <tr>
                     <td colspan="5">
                         <nav class="gbtn_curd">
-                            <button>新增</button>
+                            <button id="userTable_btnInsertUser">新增</button>
                             <button>修改</button>
-                            <button>删除</button>
+                            <button id="userTable_btnDeleteUsers">删除</button>
                         </nav>
                         <nav class="gbtn_page">
-                            首页&nbsp;上一页&nbsp;
-                            <select></select>&nbsp;
-                            下一页&nbsp;尾页
+                            首页&nbsp;上一页&nbsp;<select></select>&nbsp;下一页&nbsp;尾页
                         </nav>
                     </td>
                 </tr>
             </tfoot>
             <tbody id="myTbody">
-                <tr>
-                    <td><input type="checkbox" value="1"></td>
+                <tr data-row-id="1">
+                    <td><input type="checkbox" name="trCheck" value="1"></td>
                     <td>admin</td>
                     <td>admin</td>
                     <td>男</td>
                     <td>admin@qq.com</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" value="2"></td>
+                <tr data-row-id="2">
+                    <td><input type="checkbox" name="trCheck" value="2"></td>
                     <td>test</td>
                     <td>test</td>
                     <td>女</td>
                     <td>test@qq.com</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" value="3"></td>
+                <tr data-row-id="3">
+                    <td><input type="checkbox" name="trCheck" value="3"></td>
                     <td>test01</td>
                     <td>test01</td>
                     <td>女</td>
                     <td>test01@qq.com</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" value="4"></td>
+                <tr data-row-id="4">
+                    <td><input type="checkbox" name="trCheck" value="4"></td>
                     <td>manager</td>
                     <td>manager</td>
                     <td>男</td>
@@ -123,5 +242,6 @@
                 </tr>
             </tbody>
         </table>
-    </body>
-    </html>
+    </section>
+</body>
+</html>
